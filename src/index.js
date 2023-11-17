@@ -1,6 +1,7 @@
 const dotenv = require("dotenv");
 const express = require("express");
 const mongoose = require("mongoose");
+const authRoutes = require("./routes/authRoutes");
 
 dotenv.config();
 
@@ -28,3 +29,5 @@ app.get("/", (req, res) => {
 app.listen(3000, () => {
   console.log("listening on Port 3000");
 });
+
+app.use(authRoutes);

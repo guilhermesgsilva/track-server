@@ -5,6 +5,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const authRoutes = require("./routes/authRoutes");
+const requireAuth = require("./middlewares/requireAuth");
 
 dotenv.config();
 
@@ -27,8 +28,8 @@ const app = express();
 
 app.use(bodyParser.json());
 
-app.get("/", (req, res) => {
-  res.send("Hello world!");
+app.get("/", requireAuth, (req, res) => {
+  res.send(`Your email: ${req.user.email}`);
 });
 
 app.listen(3000, () => {
